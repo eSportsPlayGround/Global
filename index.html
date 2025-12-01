@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>eSports PlayGround | Platinum</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- FIREBASE COMPAT (CDN) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+<div id="app-root">
+    <div id="toast-area"></div>
+
+    <!-- AUTHENTICATION -->
+    <div id="view-auth" class="auth-view">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="width: 70px; height: 70px; border: 2px solid var(--cyan); border-radius: 20px; margin: 0 auto 16px; display: grid; place-items: center; box-shadow: var(--glow-cyan);">
+                <span class="material-icons-round" style="font-size: 36px; color: var(--cyan);">sports_esports</span>
+            </div>
+            <h1 class="h1">eSports<br><span style="color:var(--cyan)">PlayGround</span></h1>
+        </div>
+        <div id="form-login">
+            <input type="text" id="l-user" class="input-box" placeholder="Username">
+            <input type="password" id="l-pass" class="input-box" placeholder="Password">
+            <button class="btn btn-primary" id="btn-login-action" onclick="window.auth.login()">LOGIN</button>
+            <p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-muted)">New Player? <span style="color:var(--cyan); cursor:pointer" onclick="window.ui.toggleAuth('signup')">Create Account</span></p>
+        </div>
+        <div id="form-signup" class="hidden">
+            <div style="display:flex; gap:10px; margin-bottom:20px;">
+                <button class="btn btn-outline" id="role-player" onclick="window.auth.setRole('player')" style="flex:1; border-color:var(--cyan); color:var(--cyan);">Player</button>
+                <button class="btn btn-outline" id="role-organizer" onclick="window.auth.setRole('organizer')" style="flex:1;">Organizer</button>
+            </div>
+            <label>Country (Auto Currency)</label>
+            <select id="s-country" class="input-box">
+                <option value="IN">India (₹ INR)</option><option value="US">USA ($ USD)</option><option value="EU">Europe (€ EUR)</option>
+                <option value="UK">UK (£ GBP)</option><option value="JP">Japan (¥ JPY)</option><option value="GL">Global ($ USD)</option>
+            </select>
+            <label>Details</label>
+            <input type="text" id="s-name" class="input-box" placeholder="Full Name">
+            <input type="text" id="s-user" class="input-box" placeholder="Username (Unique)">
+            <input type="email" id="s-email" class="input-box" placeholder="Email Address">
+            <input type="tel" id="s-phone" class="input-box" placeholder="Phone Number">
+            <input type="password" id="s-pass" class="input-box" placeholder="Password">
+            <button class="btn btn-primary" id="btn-signup-action" onclick="window.auth.signup()">REGISTER</button>
+            <p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-muted)">Have account? <span style="color:var(--cyan); cursor:pointer" onclick="window.ui.toggleAuth('login')">Login</span></p>
+        </div>
+    </div>
+
+    <!-- APP -->
+    <div id="view-app" class="hidden" style="height:100%; display:flex; flex-direction:column;">
+        <header class="header">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:36px; height:36px; background:var(--cyan); border-radius:10px; display:grid; place-items:center; font-weight:700; color:black;" id="nav-av">U</div>
+                <div><div class="bold" style="font-size:14px; color:white;" id="nav-user">User</div><div class="text-xs" style="color:var(--cyan);" id="nav-role">PLAYER</div></div>
+            </div>
+            <div style="font-family:'Rajdhani'; font-weight:700; font-size:18px; color:var(--neon-green);" id="nav-bal">0.00</div>
+        </header>
+        <div id="main-content" class="content"></div>
+        <div id="fab" class="fab hidden" onclick="window.ui.router('create_match')"><span class="material-icons-round">add</span></div>
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="window.ui.router('home', this)"><span class="material-icons-round">grid_view</span>Home</div>
+            <div class="nav-item" onclick="window.ui.router('wallet', this)"><span class="material-icons-round">account_balance_wallet</span>Wallet</div>
+            <div class="nav-item hidden" id="menu-admin" onclick="window.ui.router('admin', this)"><span class="material-icons-round">admin_panel_settings</span>Admin</div>
+            <div class="nav-item" onclick="window.ui.router('profile', this)"><span class="material-icons-round">person</span>Profile</div>
+        </nav>
+    </div>
+
+    <!-- MODALS & OVERLAYS -->
+    <div id="view-details" class="detail-view hidden"></div>
+    <div id="modal-container"></div>
+</div>
+
+<!-- Main Script Module -->
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>
