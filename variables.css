@@ -1,0 +1,20 @@
+:root {
+    --cyan: #00DFDC;
+    --pink: #FF1744;
+    --neon-green: #00FF7F;
+    --yellow: #FFCB00;
+    
+    --bg-body: #050505;
+    --bg-surface: #111111;
+    --bg-input: #1C1C1E;
+    
+    --text-main: #FFFFFF;
+    --text-muted: #A1A1AA;
+    --border: #333333;
+    
+    --glow-cyan: 0 0 15px rgba(0, 223, 220, 0.15);
+    
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+    --nav-height: 65px;
+}
